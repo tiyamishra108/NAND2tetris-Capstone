@@ -1,0 +1,28 @@
+// Nand2Tetris Capstone
+// Computer.hdl
+
+CHIP Computer {
+
+    IN reset;
+
+    PARTS:
+
+    // CPU
+    CPU(inM=memoryOut,
+        instruction=instruction,
+        reset=reset,
+        outM=cpuOut,
+        writeM=writeM,
+        addressM=addressM,
+        pc=pc);
+
+    // Memory
+    Memory(in=cpuOut,
+           load=writeM,
+           address=addressM,
+           out=memoryOut);
+
+    // Instruction Memory
+    ROM32K(address=pc,
+           out=instruction);
+}
